@@ -69,4 +69,7 @@ router.put("/", async(req, res) => {
     }
 })
 
+//--------------------DELETE REQUESTS--------------------
+
+
 export { router as financesRouter }
