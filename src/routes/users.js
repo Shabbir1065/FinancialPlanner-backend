@@ -5,6 +5,8 @@ import { UserModel } from "../models/Users.js";
 
 const router = express.Router();
 
+//--------------------POST REQUESTS--------------------
+//Registering the user
 router.post("/register", async (req, res) =>{
     const { username, password } = req.body;
     
@@ -22,6 +24,7 @@ router.post("/register", async (req, res) =>{
     res.json({message: "User registered successfully"});
 });
 
+//Logging in the user
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await UserModel.findOne({ username });
