@@ -108,8 +108,12 @@ router.put("/updateFinance", async(req, res) => {
     try{
         const user = await UserModel.findOne({ _id: req.body.userID });
         
-        //Figure out how to update stuff
-        
+        //search for the index
+        const financeIndex = user.finances.findIndex(finance => finance.id === req.body.financeID);
+
+        //change values
+        user.finances[financeIndex].description = req.body.description;
+        user.finances[financeIndex].value = req.body.value;
 
         //save the new user info
         const response = await user.save();
