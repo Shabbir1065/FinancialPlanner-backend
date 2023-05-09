@@ -3,15 +3,13 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import { userRouter } from "./routes/users.js"
-import { financesRouter } from "./routes/finances.js"
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-app.use("/auth", userRouter);
-app.use("/finances", financesRouter);
+app.use("/api", userRouter);
 
 mongoose.connect("mongodb+srv://shabbir1065:MERNproject@financials.cx6ol15.mongodb.net/financials?retryWrites=true&w=majority");
 
