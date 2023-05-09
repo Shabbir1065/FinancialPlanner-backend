@@ -82,10 +82,18 @@ router.post("/", async(req, res) => {
 })
 
 //--------------------DELETE REQUESTS--------------------
+//Delete an income/expense/investment from the users finance array
 router.delete("/deleteFinance", async(req, res) => {
     try{
         const user = await UserModel.findOne({ _id: req.body.userID });
-        user.finances.id(req.params.id).remove();
+        
+        //search for the index
+        const financeIndex = user.finances.findIndex(finance => finance.id === req.body.financeID);
+
+        //remove the finance
+        user.finances.splice(financeIndex, 1);
+
+        //save the new user info
         const response = await user.save();
         res.json(response);
     }
@@ -95,6 +103,21 @@ router.delete("/deleteFinance", async(req, res) => {
 })
 
 //--------------------PUT REQUESTS--------------------
+//Let the user update the description and/or value of an income/expense/investement (an element in the finances array)
+router.put("/updateFinance", async(req, res) => {
+    try{
+        const user = await UserModel.findOne({ _id: req.body.userID });
+        
+        //Figure out how to update stuff
+        
 
+        //save the new user info
+        const response = await user.save();
+        res.json(response);
+    }
+    catch (err){
+        res.json(err);
+    }
+})
 
 export { router as userRouter };
