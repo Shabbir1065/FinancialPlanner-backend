@@ -7,9 +7,9 @@ const router = express.Router();
 
 //--------------------GET REQUESTS--------------------
 //get all finances for one user
-router.get("/userFinances", async(req, res) => {
+router.get("/userFinances/:userID", async(req, res) => {
     try{
-        const user = await UserModel.findOne({ _id: req.body.userID });
+        const user = await UserModel.findOne({ _id: req.params.userID });
         const response = user.finances;
         res.json(response);
     }
@@ -19,13 +19,13 @@ router.get("/userFinances", async(req, res) => {
 })
 
 //get all finances of single type for one user
-router.get("/userFinanceByType", async (req, res) => {
+router.get("/userFinanceByType/:userID/:financeType", async (req, res) => {
     try {
-      const user = await UserModel.findOne({ _id: req.body.userID });
-      const response = user.finances.filter(finance => finance.financeType === req.body.financeType);
-      res.json(response);
+        const user = await UserModel.findOne({ _id: req.params.userID });
+        const response = user.finances.filter(finance => finance.financeType === req.params.financeType);
+        res.json(response);
     } catch (err) {
-      res.json(err);
+        res.json(err);
     }
   });
 
