@@ -113,7 +113,7 @@ router.put("/updateFinance", async(req, res) => {
 
         //change values
         user.finances[financeIndex].description = req.body.description;
-        user.finances[financeIndex].value = req.body.value;
+        user.finances[financeIndex].value = Number(req.body.value);
 
         //save the new user info
         const response = await user.save();
